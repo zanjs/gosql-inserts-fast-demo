@@ -15,7 +15,7 @@ func main() {
 		ti := time.Now()
 		uid := suuid.New().String()
 		rows = append(rows, []interface{}{
-			fmt.Sprintf("CODE_%d", i),
+			fmt.Sprintf("sid_%d", i),
 			fmt.Sprintf("name %d", i),
 			i,
 			ti,
@@ -23,11 +23,11 @@ func main() {
 		})
 	}
 	fmt.Println(rows)
-	columns := []string{"code", "name", "count", "created_at", "uid"}
+	columns := []string{"s_id", "name", "count", "created_at", "uid"}
 	dialect := "mysql"
 
 	start := time.Now()
-	err := batchputs.Put(db.DB(), dialect, "countries", "code", columns, rows)
+	err := batchputs.Put(db.DB(), dialect, "countries", "s_id", columns, rows)
 	if err != nil {
 		panic(err)
 	}
